@@ -36,7 +36,7 @@ public class SetTest {
 
     @ParameterizedTest
     @DisplayName("집합의 원소를 검증한다")
-    @ValueSource(ints = {1,2,3})
+    @ValueSource(ints = {1, 2, 3})
     void containsTest(int input) {
         assertThat(numbers.contains(input)).isTrue();
     }
