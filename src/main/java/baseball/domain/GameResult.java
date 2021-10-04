@@ -40,12 +40,19 @@ public class GameResult {
      */
     public String toResultString() {
         ArrayList<String> resultList = new ArrayList<>();
+        addResultString(resultList);
+        return String.join(" ", resultList);
+    }
+
+    private void addResultString(ArrayList<String> resultList) {
         if (strikes > 0) {
             resultList.add(strikes + "스트라이크");
         }
         if (balls > 0) {
             resultList.add(balls + "볼");
         }
-        return String.join(" ", resultList);
+        if (strikes == 0 && balls == 0) {
+            resultList.add("낫싱");
+        }
     }
 }

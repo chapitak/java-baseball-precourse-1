@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class GameResultTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"123:243:1스트라이크 1볼", "123:123:3스트라이크", "321:132:3볼"}, delimiter = ':')
+    @CsvSource(value = {"123:243:1스트라이크 1볼", "123:123:3스트라이크", "321:132:3볼", "123:456:낫싱"}, delimiter = ':')
     void computeResultTest(String input1, String input2, String resultString) {
         // given
         GameNumber gameNumber1 = GameNumber.fromUser(input1);
