@@ -1,17 +1,13 @@
 package baseball.domain;
 
+import baseball.exception.IncludingZeroException;
 import baseball.exception.NotThreeDigitsException;
-import baseball.exception.StringInputException;
 import baseball.exception.NotUniqueDigitsException;
+import baseball.exception.StringInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static baseball.utility.GameUtility.convertIntToList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class GameNumberTest {
 
@@ -45,4 +41,13 @@ class GameNumberTest {
                 .hasMessageContaining("입력된 숫자의 각 자리가 서로 다르지 않습니다");
     }
 
+    @Test
+    @DisplayName("0을 포함하고있는지 검증한다")
+    void isIncludingZeroTest() {
+        // when
+        assertThatThrownBy(() -> GameNumber.fromUser("103"))
+                // then
+                .isInstanceOf(IncludingZeroException.class)
+                .hasMessageContaining("1-9 사이의 정수만 입력할 수 있습니다.");
+    }
 }

@@ -1,8 +1,9 @@
 package baseball.domain;
 
+import baseball.exception.IncludingZeroException;
 import baseball.exception.NotThreeDigitsException;
-import baseball.exception.StringInputException;
 import baseball.exception.NotUniqueDigitsException;
+import baseball.exception.StringInputException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,6 +37,13 @@ public class GameNumber {
     private static void validateGameNumber(ArrayList<Integer> gameNumber) {
         validateThreeDigits(gameNumber);
         validateUniqueDigits(gameNumber);
+        validateIncludingZero(gameNumber);
+    }
+
+    private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
+        if (gameNumber.contains(0)) {
+            throw new IncludingZeroException("1-9 사이의 정수만 입력할 수 있습니다.");
+        }
     }
 
     /**

@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import static baseball.utility.GameUtility.convertIntToList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameUtilityTest {
 
