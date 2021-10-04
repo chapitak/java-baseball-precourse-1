@@ -15,8 +15,16 @@ public class BaseBallGameController {
     public void run() {
         baseBallGameService.generateRandomNumber();
         while (true) {
-            String userNumber = baseBallGameView.inputUserNumber();
+            playATurn();
+        }
+    }
+
+    private void playATurn() {
+        String userNumber = baseBallGameView.inputUserNumber();
+        try {
             System.out.println(baseBallGameService.computeResult(userNumber));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

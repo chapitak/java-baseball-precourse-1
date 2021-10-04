@@ -20,17 +20,6 @@ public class GameNumber {
     }
 
     /**
-     * 정수를 입력받아 GameNumber를 생성하여 리턴하는 팩토리 메서드입니다.
-     *
-     * @param gameNumber
-     * @return 생성된 GameNumber
-     */
-    public static GameNumber of(int gameNumber) {
-        ArrayList<Integer> gameNumberList = convertIntToList(gameNumber);
-        return new GameNumber(gameNumberList);
-    }
-
-    /**
      * 입력받은 세 자리 정수를 검증한다.
      *
      * @param gameNumber
@@ -48,7 +37,7 @@ public class GameNumber {
      */
     private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
         if (gameNumber.contains(0)) {
-            throw new IncludingZeroException("1-9 사이의 정수만 입력할 수 있습니다.");
+            throw new IncludingZeroException("[ERROR] 1-9 사이의 정수만 입력할 수 있습니다.");
         }
     }
 
@@ -60,7 +49,7 @@ public class GameNumber {
     private static void validateUniqueDigits(ArrayList<Integer> gameNumber) {
         HashSet<Integer> gameNumberSet = new HashSet<>(gameNumber);
         if (gameNumberSet.size() != gameNumber.size()) {
-            throw new NotUniqueDigitsException("입력된 숫자의 각 자리가 서로 다르지 않습니다");
+            throw new NotUniqueDigitsException("[ERROR] 입력된 숫자의 각 자리가 서로 다르지 않습니다");
         }
     }
 
@@ -71,7 +60,7 @@ public class GameNumber {
      */
     private static void validateThreeDigits(ArrayList<Integer> gameNumber) {
         if (gameNumber.size() != 3) {
-            throw new NotThreeDigitsException("세 자리 정수가 아닌 입력입니다.");
+            throw new NotThreeDigitsException("[ERROR] 세 자리 정수가 아닌 입력입니다.");
         }
     }
 
@@ -100,7 +89,7 @@ public class GameNumber {
             userInputNumber = Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            throw new StringInputException("정수가 아닌 입력입니다.");
+            throw new StringInputException("[ERROR] 정수가 아닌 입력입니다.");
         }
         return userInputNumber;
     }

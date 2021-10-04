@@ -23,6 +23,9 @@ public class BaseBallGameService {
         return gameResult.toResultString();
     }
 
+    /**
+     * 랜덤으로 생성한 GameNumber를 저장소에 저장한다
+     */
     public void generateRandomNumber() {
         GameNumber targetNumber = GameNumber.random();
         baseBallGameRepository.save(targetNumber);
