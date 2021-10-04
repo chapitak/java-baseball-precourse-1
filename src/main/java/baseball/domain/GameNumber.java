@@ -124,4 +124,77 @@ public class GameNumber {
             newNumber.add(newSingleNumber);
         }
     }
+
+    /**
+     * 비교대상인 GameNumber를 주입받아 스트라이크와 볼의 개수를 구한 후 GameResult를 반환한다.
+     *
+     * @param target
+     * @return 게임 결과를 계산한 GameResult
+     */
+    public GameResult computeResult(GameNumber target) {
+        int strikes = computeStrikes(target);
+        int balls = computeBalls(target);
+
+        return GameResult.of(strikes, balls);
+    }
+
+    /**
+     * 볼의 개수를 연산 후 리턴한다
+     *
+     * @param target
+     * @return 볼의 개수
+     */
+    private int computeBalls(GameNumber target) {
+        int balls = 0;
+        for (int i = 0; i < gameNumber.size(); i++) {
+            balls = addBall(target, balls, i);
+        }
+        return balls;
+    }
+
+    /**
+     * 볼의 개수를 구할 때 사용되며 볼의 개수를 하나씩 더해서 반환한다
+     *
+     * @param target
+     * @param balls
+     * @param i
+     * @return 해당될 시 볼의 개수를 1씩 증가하여 반환
+     */
+    private int addBall(GameNumber target, int balls, int i) {
+        ArrayList<Integer> indexRemovedTarget = new ArrayList<>(target.gameNumber);
+        indexRemovedTarget.remove(i);
+        if (indexRemovedTarget.contains(gameNumber.get(i))) {
+            balls++;
+        }
+        return balls;
+    }
+
+    /**
+     * 스트라이크의 개수를 연산 후 리턴한다
+     *
+     * @param target
+     * @return 스트라이크의 개수
+     */
+    private int computeStrikes(GameNumber target) {
+        int strikes = 0;
+        for (int i = 0; i < gameNumber.size(); i++) {
+            strikes = addStrike(target, strikes, i);
+        }
+        return strikes;
+    }
+
+    /**
+     * 스트라이크의 개수를 구할 때 사용되며 스트라이크의 개수를 하나씩 더하여 반환한다
+     *
+     * @param target
+     * @param strikes
+     * @param i
+     * @return 해당될 시 스트라이크의 개수를 1개씩 더해서 반환
+     */
+    private int addStrike(GameNumber target, int strikes, int i) {
+        if (gameNumber.get(i).equals(target.gameNumber.get(i))) {
+            strikes++;
+        }
+        return strikes;
+    }
 }
