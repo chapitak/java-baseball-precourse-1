@@ -13,6 +13,7 @@ public class GameResult {
 
     /**
      * 두 숫자를 비교하여 게임결과를 반환한다
+     *
      * @param gameNumber1
      * @param gameNumber2
      * @return 게임 결과
@@ -23,6 +24,7 @@ public class GameResult {
 
     /**
      * 스트라이크와 볼의 개수를 통해 게임 결과를 반환하는 팩토리 메서드
+     *
      * @param strikes
      * @param balls
      * @return 게임결과를 생성하여 반환한다
@@ -33,6 +35,7 @@ public class GameResult {
 
     /**
      * 게임결과를 문자열로 만들어 반환한다
+     *
      * @return 게임결과를 문자열로 변환한 값
      */
     public String toResultString() {
