@@ -50,4 +50,5 @@ class GameNumberTest {
                 .isInstanceOf(IncludingZeroException.class)
                 .hasMessageContaining("1-9 사이의 정수만 입력할 수 있습니다.");
     }
+
 }

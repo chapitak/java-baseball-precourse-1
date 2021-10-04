@@ -4,6 +4,7 @@ import baseball.exception.IncludingZeroException;
 import baseball.exception.NotThreeDigitsException;
 import baseball.exception.NotUniqueDigitsException;
 import baseball.exception.StringInputException;
+import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ public class GameNumber {
     private ArrayList<Integer> gameNumber;
 
     public GameNumber(ArrayList<Integer> gameNumber) {
+        validateGameNumber(gameNumber);
         this.gameNumber = gameNumber;
     }
 
@@ -25,7 +27,6 @@ public class GameNumber {
      */
     public static GameNumber of(int gameNumber) {
         ArrayList<Integer> gameNumberList = convertIntToList(gameNumber);
-        validateGameNumber(gameNumberList);
         return new GameNumber(gameNumberList);
     }
 
@@ -40,6 +41,11 @@ public class GameNumber {
         validateIncludingZero(gameNumber);
     }
 
+    /**
+     * 입력받은 세 자리 숫자 중 0을 포함할 경우 예외를 던진다
+     *
+     * @param gameNumber
+     */
     private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
         if (gameNumber.contains(0)) {
             throw new IncludingZeroException("1-9 사이의 정수만 입력할 수 있습니다.");
@@ -76,9 +82,9 @@ public class GameNumber {
      * @return 생성된 GameNumber
      */
     public static GameNumber fromUser(String userInput) {
-        int userInputNumber = 0;
-        userInputNumber = parseUserInput(userInput);
-        return GameNumber.of(userInputNumber);
+        int parsedUserInput = parseUserInput(userInput);
+        ArrayList<Integer> gameNumberList = convertIntToList(parsedUserInput);
+        return new GameNumber(gameNumberList);
     }
 
     /**
@@ -97,5 +103,25 @@ public class GameNumber {
             throw new StringInputException("정수가 아닌 입력입니다.");
         }
         return userInputNumber;
+    }
+
+    /**
+     * 서로 다른 세 자리 정수를 생성하여 반환한다.
+     *
+     * @return 서로 다른 세 자리 정수
+     */
+    public static GameNumber random() {
+        ArrayList<Integer> newNumber = new ArrayList<>();
+        while (newNumber.size() != 3) {
+            addSingleNumber(newNumber);
+        }
+        return new GameNumber(newNumber);
+    }
+
+    private static void addSingleNumber(ArrayList<Integer> newNumber) {
+        int newSingleNumber = Randoms.pickNumberInRange(1, 9);
+        if (!newNumber.contains(newSingleNumber)) {
+            newNumber.add(newSingleNumber);
+        }
     }
 }
