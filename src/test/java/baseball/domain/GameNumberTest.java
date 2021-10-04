@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static baseball.domain.GameNumber.convertIntToList;
+import static baseball.utility.GameUtility.convertIntToList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -45,15 +45,4 @@ class GameNumberTest {
                 .hasMessageContaining("입력된 숫자의 각 자리가 서로 다르지 않습니다");
     }
 
-    @Test
-    void convertIntToListTest() {
-        //given
-        int gameNumber = 234;
-
-        //when
-        ArrayList<Integer> integers = convertIntToList(gameNumber);
-
-        //then
-        assertThat(integers).isEqualTo(Arrays.asList(2, 3, 4));
-    }
 }

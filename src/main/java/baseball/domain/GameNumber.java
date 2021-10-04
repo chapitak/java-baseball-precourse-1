@@ -7,6 +7,8 @@ import baseball.exception.NotUniqueDigitsException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import static baseball.utility.GameUtility.convertIntToList;
+
 public class GameNumber {
     private ArrayList<Integer> gameNumber;
 
@@ -46,23 +48,6 @@ public class GameNumber {
         if (gameNumberSet.size() != gameNumber.size()) {
             throw new NotUniqueDigitsException("입력된 숫자의 각 자리가 서로 다르지 않습니다");
         }
-    }
-
-    /**
-     * 게임을 위한 숫자를 정수형으로 입력받아 각 자리를 담은 ArrayList<Integer>로 반환하여 리턴합니다.
-     *
-     * @param gameNumber
-     * @return 각 자리의 숫자를 담은 ArrayList<Integer>
-     */
-    static ArrayList<Integer> convertIntToList(int gameNumber) {
-        ArrayList<Integer> gameNumberList = new ArrayList<>();
-        int gameNumberToCompute = gameNumber;
-        int digits = (int) (Math.log10(gameNumber) + 1);
-        for (int i = 1; i <= digits; i++) {
-            gameNumberToCompute = (int) (gameNumber / Math.pow(10, (digits - i)));
-            gameNumberList.add(gameNumberToCompute % 10);
-        }
-        return gameNumberList;
     }
 
     /**
