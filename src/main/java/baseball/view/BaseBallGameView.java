@@ -11,4 +11,8 @@ public interface BaseBallGameView {
     String inputUserNumber();
 
     RestartStatus inputRestart();
+
+    void printGameResult(String gameResult);
+
+    void printGameClear();
 }

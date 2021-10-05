@@ -12,7 +12,10 @@ import java.util.HashSet;
 import static baseball.utility.GameUtility.convertIntToList;
 
 public class GameNumber {
-    private ArrayList<Integer> gameNumber;
+    public static final int SIZE_OF_GAME_NUMBER = 3;
+    public static final int START_INCLUSIVE_RANDOM_NUMBER = 1;
+    public static final int END_INCLUSIVE_RANDOM_NUMBER = 9;
+    private final ArrayList<Integer> gameNumber;
 
     public GameNumber(ArrayList<Integer> gameNumber) {
         validateGameNumber(gameNumber);
@@ -59,7 +62,7 @@ public class GameNumber {
      * @param gameNumber
      */
     private static void validateThreeDigits(ArrayList<Integer> gameNumber) {
-        if (gameNumber.size() != 3) {
+        if (gameNumber.size() != SIZE_OF_GAME_NUMBER) {
             throw new NotThreeDigitsException("[ERROR] 세 자리 정수가 아닌 입력입니다.");
         }
     }
@@ -101,14 +104,14 @@ public class GameNumber {
      */
     public static GameNumber random() {
         ArrayList<Integer> newNumber = new ArrayList<>();
-        while (newNumber.size() != 3) {
+        while (newNumber.size() != SIZE_OF_GAME_NUMBER) {
             addSingleNumber(newNumber);
         }
         return new GameNumber(newNumber);
     }
 
     private static void addSingleNumber(ArrayList<Integer> newNumber) {
-        int newSingleNumber = Randoms.pickNumberInRange(1, 9);
+        int newSingleNumber = Randoms.pickNumberInRange(START_INCLUSIVE_RANDOM_NUMBER, END_INCLUSIVE_RANDOM_NUMBER);
         if (!newNumber.contains(newSingleNumber)) {
             newNumber.add(newSingleNumber);
         }

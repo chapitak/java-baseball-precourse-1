@@ -7,6 +7,7 @@ import baseball.view.BaseBallGameView;
 import java.util.Objects;
 
 public class BaseBallGameController {
+    public static final String GAME_CLEAR_CONDITION = "3스트라이크";
     private final BaseBallGameView baseBallGameView;
     private final BaseBallGameService baseBallGameService;
 
@@ -33,10 +34,10 @@ public class BaseBallGameController {
     private RestartStatus playGame() {
         baseBallGameService.generateRandomNumber();
         String result = "";
-        while (!Objects.equals(result, "3스트라이크")) {
+        while (!Objects.equals(result, GAME_CLEAR_CONDITION)) {
             result = playATurn();
         }
-        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+        baseBallGameView.printGameClear();
         return baseBallGameView.inputRestart();
     }
 
@@ -47,13 +48,13 @@ public class BaseBallGameController {
      */
     private String playATurn() {
         String userNumber = baseBallGameView.inputUserNumber();
-        String result = "";
+        String gameResult = "";
         try {
-            result = baseBallGameService.computeResult(userNumber);
-            System.out.println(result);
+            gameResult = baseBallGameService.computeResult(userNumber);
+            baseBallGameView.printGameResult(gameResult);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return result;
+        return gameResult;
     }
 }

@@ -3,8 +3,12 @@ package baseball.domain;
 import java.util.ArrayList;
 
 public class GameResult {
-    private int strikes;
-    private int balls;
+    public static final String STRIKE = "스트라이크";
+    public static final String BALL = "볼";
+    public static final String NOTHING = "낫싱";
+    public static final String RESULT_DELIMITER = " ";
+    private final int strikes;
+    private final int balls;
 
     public GameResult(int strikes, int balls) {
         this.strikes = strikes;
@@ -41,18 +45,18 @@ public class GameResult {
     public String toResultString() {
         ArrayList<String> resultList = new ArrayList<>();
         addResultString(resultList);
-        return String.join(" ", resultList);
+        return String.join(RESULT_DELIMITER, resultList);
     }
 
     private void addResultString(ArrayList<String> resultList) {
         if (strikes > 0) {
-            resultList.add(strikes + "스트라이크");
+            resultList.add(strikes + STRIKE);
         }
         if (balls > 0) {
-            resultList.add(balls + "볼");
+            resultList.add(balls + BALL);
         }
         if (strikes == 0 && balls == 0) {
-            resultList.add("낫싱");
+            resultList.add(NOTHING);
         }
     }
 }
