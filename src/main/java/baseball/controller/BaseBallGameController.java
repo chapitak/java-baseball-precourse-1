@@ -1,5 +1,6 @@
 package baseball.controller;
 
+import baseball.domain.RestartStatus;
 import baseball.service.BaseBallGameService;
 import baseball.view.BaseBallGameView;
 
@@ -15,15 +16,28 @@ public class BaseBallGameController {
     }
 
     /**
-     * 랜덤한 숫자를 생성하고 게임을 시행한다. 결과가 3스트라이크가 나올 때까지 시행을 반복한다. 3스트라이크가 나오면 게임을 끝낸다
+     * 랜덤한 숫자를 생성하고 게임을 시행한다. 게임이 종료되면 1 또는 2를 입력받아 게임의 재개를 결정한다
      */
     public void run() {
+        RestartStatus restartStatus = RestartStatus.RESTART;
+        while (restartStatus.isRestart()) {
+            restartStatus = playGame();
+        }
+    }
+
+    /**
+     * 게임을 진행하여 3스트라이크이면 게임을 종료하고 게임 재개 여부를 반환한다
+     *
+     * @return 게임의 재개여부 상태
+     */
+    private RestartStatus playGame() {
         baseBallGameService.generateRandomNumber();
         String result = "";
         while (!Objects.equals(result, "3스트라이크")) {
             result = playATurn();
         }
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+        return baseBallGameView.inputRestart();
     }
 
     /**
