@@ -38,6 +38,28 @@ public class ApplicationTest extends NSTest {
         }
     }
 
+    @Test
+    void 재시작여부_오입력_후_재입력() {
+        try (final MockedStatic<Randoms> mockRandoms = mockStatic(Randoms.class)) {
+            mockRandoms.when(() -> Randoms.pickNumberInRange(anyInt(), anyInt()))
+                    .thenReturn(7, 1, 3)
+                    .thenReturn(5, 8, 9);
+            run("713", "3", "1", "597", "589", "2");
+            verify("3스트라이크", "[ERROR] 1 또는 2를 입력해주세요.", "1스트라이크 1볼");
+        }
+    }
+
+    @Test
+    void 게임숫자_오입력_후_재입력() {
+        try (final MockedStatic<Randoms> mockRandoms = mockStatic(Randoms.class)) {
+            mockRandoms.when(() -> Randoms.pickNumberInRange(anyInt(), anyInt()))
+                    .thenReturn(7, 1, 3)
+                    .thenReturn(5, 8, 9);
+            run("김정교", "103", "131", "12", "713", "1", "597", "589", "2");
+            verify("[ERROR] 정수가 아닌 입력입니다.", "[ERROR] 1-9 사이의 정수만 입력할 수 있습니다.", "[ERROR] 입력된 숫자의 각 자리가 서로 다르지 않습니다", "[ERROR] 세 자리 정수가 아닌 입력입니다.", "3스트라이크", "게임 끝", "1스트라이크 1볼");
+        }
+    }
+
     @AfterEach
     void tearDown() {
         outputStandard();
