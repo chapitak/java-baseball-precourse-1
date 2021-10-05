@@ -26,10 +26,6 @@ public enum RestartStatus {
         throw new NotRestartStatusException("[ERROR] 1 또는 2를 입력해주세요.");
     }
 
-    public String getUserInput() {
-        return userInput;
-    }
-
     public boolean isRestart() {
         return isRestart;
     }

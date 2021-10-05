@@ -38,7 +38,31 @@ public class BaseBallGameController {
             result = playATurn();
         }
         baseBallGameView.printGameClear();
-        return baseBallGameView.inputRestart();
+        RestartStatus restartStatus = getUserRestartInput();
+        return restartStatus;
+    }
+
+    /**
+     * 재시작 여부를 입력받아 RestartStatus로 반환한다
+     *
+     * @return 재시작 여부
+     */
+    private RestartStatus getUserRestartInput() {
+        RestartStatus restartStatus = null;
+        while (restartStatus == null) {
+            restartStatus = getUserRestartInputTry();
+        }
+        return restartStatus;
+    }
+
+    private RestartStatus getUserRestartInputTry() {
+        RestartStatus restartStatus = null;
+        try {
+            restartStatus = baseBallGameView.inputRestart();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        return restartStatus;
     }
 
     /**
