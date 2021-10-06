@@ -15,4 +15,6 @@ public interface BaseBallGameView {
     void printGameResult(String gameResult);
 
     void printGameClear();
+
+    void printErrorMessage(String message);
 }

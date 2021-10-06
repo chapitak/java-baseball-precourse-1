@@ -38,8 +38,7 @@ public class BaseBallGameController {
             result = playATurn();
         }
         baseBallGameView.printGameClear();
-        RestartStatus restartStatus = getUserRestartInput();
-        return restartStatus;
+        return getUserRestartInput();
     }
 
     /**
@@ -60,7 +59,7 @@ public class BaseBallGameController {
         try {
             restartStatus = baseBallGameView.inputRestart();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            baseBallGameView.printErrorMessage(e.getMessage());
         }
         return restartStatus;
     }
@@ -77,7 +76,7 @@ public class BaseBallGameController {
             gameResult = baseBallGameService.computeResult(userNumber);
             baseBallGameView.printGameResult(gameResult);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            baseBallGameView.printErrorMessage(e.getMessage());
         }
         return gameResult;
     }

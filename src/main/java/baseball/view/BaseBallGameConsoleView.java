@@ -4,6 +4,9 @@ import baseball.domain.RestartStatus;
 import nextstep.utils.Console;
 
 public class BaseBallGameConsoleView implements BaseBallGameView {
+
+    public static final String ERROR_PREFIX = "[ERROR]";
+
     @Override
     public String inputUserNumber() {
         System.out.println("숫자를 입력해주세요 : ");
@@ -24,5 +27,10 @@ public class BaseBallGameConsoleView implements BaseBallGameView {
     @Override
     public void printGameClear() {
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+    }
+
+    @Override
+    public void printErrorMessage(String message) {
+        System.out.println(ERROR_PREFIX + message);
     }
 }
