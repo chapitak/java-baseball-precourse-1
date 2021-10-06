@@ -31,6 +31,6 @@ public class BaseBallGameConsoleView implements BaseBallGameView {
 
     @Override
     public void printErrorMessage(String message) {
-        System.out.println(ERROR_PREFIX + message);
+        System.out.println(ERROR_PREFIX + " " + message);
     }
 }

@@ -8,6 +8,7 @@ public enum RestartStatus {
     RESTART("1", true),
     STOP("2", false);
 
+    public static final String ERROR_MESSAGE_NOT_RESTART_STATUS = "1 또는 2를 입력해주세요.";
     private final String userInput;
     private final boolean isRestart;
 
@@ -23,7 +24,7 @@ public enum RestartStatus {
         if (Objects.equals(userInput, STOP.userInput)) {
             return STOP;
         }
-        throw new NotRestartStatusException("[ERROR] 1 또는 2를 입력해주세요.");
+        throw new NotRestartStatusException(ERROR_MESSAGE_NOT_RESTART_STATUS);
     }
 
     public boolean isRestart() {

@@ -15,6 +15,10 @@ public class GameNumber {
     public static final int SIZE_OF_GAME_NUMBER = 3;
     public static final int START_INCLUSIVE_RANDOM_NUMBER = 1;
     public static final int END_INCLUSIVE_RANDOM_NUMBER = 9;
+    public static final String ERROR_MESSAGE_INCLUDING_ZERO = "1-9 사이의 정수만 입력할 수 있습니다.";
+    public static final String ERROR_MESSAGE_NOT_UNIQUE_DIGITS = "입력된 숫자의 각 자리가 서로 다르지 않습니다";
+    public static final String ERROR_MESSAGE_NOT_THREE_DIGITS = "세 자리 정수가 아닌 입력입니다.";
+    public static final String ERROR_MESSAGE_STRING_INPUT = "정수가 아닌 입력입니다.";
     private final ArrayList<Integer> gameNumber;
 
     public GameNumber(ArrayList<Integer> gameNumber) {
@@ -40,7 +44,7 @@ public class GameNumber {
      */
     private static void validateThreeDigits(ArrayList<Integer> gameNumber) {
         if (gameNumber.size() != SIZE_OF_GAME_NUMBER) {
-            throw new NotThreeDigitsException("[ERROR] 세 자리 정수가 아닌 입력입니다.");
+            throw new NotThreeDigitsException(ERROR_MESSAGE_NOT_THREE_DIGITS);
         }
     }
 
@@ -52,7 +56,7 @@ public class GameNumber {
     private static void validateUniqueDigits(ArrayList<Integer> gameNumber) {
         HashSet<Integer> gameNumberSet = new HashSet<>(gameNumber);
         if (gameNumberSet.size() != gameNumber.size()) {
-            throw new NotUniqueDigitsException("[ERROR] 입력된 숫자의 각 자리가 서로 다르지 않습니다");
+            throw new NotUniqueDigitsException(ERROR_MESSAGE_NOT_UNIQUE_DIGITS);
         }
     }
 
@@ -63,7 +67,7 @@ public class GameNumber {
      */
     private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
         if (gameNumber.contains(0)) {
-            throw new IncludingZeroException("[ERROR] 1-9 사이의 정수만 입력할 수 있습니다.");
+            throw new IncludingZeroException(ERROR_MESSAGE_INCLUDING_ZERO);
         }
     }
 
@@ -92,7 +96,7 @@ public class GameNumber {
             userInputNumber = Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            throw new StringInputException("[ERROR] 정수가 아닌 입력입니다.");
+            throw new StringInputException(ERROR_MESSAGE_STRING_INPUT);
         }
         return userInputNumber;
     }
