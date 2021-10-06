@@ -34,13 +34,13 @@ public class GameNumber {
     }
 
     /**
-     * 입력받은 세 자리 숫자 중 0을 포함할 경우 예외를 던진다
+     * 입력받은 정수가 세 자리 숫자인지를 검증하여 예외를 던진다.
      *
      * @param gameNumber
      */
-    private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
-        if (gameNumber.contains(0)) {
-            throw new IncludingZeroException("[ERROR] 1-9 사이의 정수만 입력할 수 있습니다.");
+    private static void validateThreeDigits(ArrayList<Integer> gameNumber) {
+        if (gameNumber.size() != SIZE_OF_GAME_NUMBER) {
+            throw new NotThreeDigitsException("[ERROR] 세 자리 정수가 아닌 입력입니다.");
         }
     }
 
@@ -57,13 +57,13 @@ public class GameNumber {
     }
 
     /**
-     * 입력받은 정수가 세 자리 숫자인지를 검증하여 예외를 던진다.
+     * 입력받은 세 자리 숫자 중 0을 포함할 경우 예외를 던진다
      *
      * @param gameNumber
      */
-    private static void validateThreeDigits(ArrayList<Integer> gameNumber) {
-        if (gameNumber.size() != SIZE_OF_GAME_NUMBER) {
-            throw new NotThreeDigitsException("[ERROR] 세 자리 정수가 아닌 입력입니다.");
+    private static void validateIncludingZero(ArrayList<Integer> gameNumber) {
+        if (gameNumber.contains(0)) {
+            throw new IncludingZeroException("[ERROR] 1-9 사이의 정수만 입력할 수 있습니다.");
         }
     }
 

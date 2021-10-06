@@ -11,7 +11,7 @@ public class GameUtility {
      */
     public static ArrayList<Integer> convertIntToList(int gameNumber) {
         ArrayList<Integer> gameNumberList = new ArrayList<>();
-        int gameNumberToCompute = gameNumber;
+        int gameNumberToCompute;
         int digits = (int) (Math.log10(gameNumber) + 1);
         for (int i = 1; i <= digits; i++) {
             gameNumberToCompute = (int) (gameNumber / Math.pow(10, (digits - i)));
